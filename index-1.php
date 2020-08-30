@@ -1,3 +1,59 @@
+<?php
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
+
+  require 'phpmailer/src/Exception.php';
+  require 'phpmailer/src/PHPMailer.php';
+  require 'phpmailer/src/SMTP.php';
+
+  // Include autoload.php file
+  require 'autoload.php';
+  // Create object of PHPMailer class
+  $mail = new PHPMailer(true);
+
+  $output = '';
+
+  if (isset($_POST['sendmail'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $select1 = $_POST['select1'];
+    $datepicker = $_POST['datepicker'];
+    $message = $_POST['message'];
+
+    try {
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      // Gmail ID which you want to use as SMTP server
+      $mail->Username = 'leomessi21210@gmail.com';
+      // Gmail Password
+      $mail->Password = 'add password here';
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+      $mail->Port = 587;
+
+      // Email ID from which you want to send the email
+      $mail->setFrom($email);
+      // Recipient Email ID where you want to receive emails
+      $mail->addAddress('leomessi2121@gmail.com');
+
+      $mail->isHTML(true);
+      $mail->Subject = 'Form Submission';
+      $mail->Body = "<h3>Name : $name <br>Email : $email <br>Phone : $phone <br>Department : $select1 <br>Date : $datepicker <br>Message : $message</h3>";
+
+      $mail->send();
+      $output = '<div class="alert alert-success">
+                  <h5>Thankyou! for contacting us, We\'ll get back to you soon!</h5>
+                </div>';
+    } catch (Exception $e) {
+      $output = '<div class="alert alert-danger">
+                  <h5>' . $e->getMessage() . '</h5>
+                </div>';
+    }
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -300,6 +356,7 @@
               <div class="tittle">
                 <h2>Make an Appointment</h2>
               </div>
+              <h5 class="text-center text-success"><?= $output; ?></h5>
               <form role="form" id="appointment" method="post">
                 <ul class="row">
                   <li class="col-sm-6">
@@ -337,7 +394,7 @@
                     <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message"></textarea>
                   </li>
                   <li class="col-sm-12">
-                    <button type="submit" value="submit" class="btn" id="btn_submit">make an appointment</button>
+                    <button type="submit" value="submit" name="sendmail" class="btn" id="btn_submit">make an appointment</button>
                   </li>
                 </ul>
               </form>

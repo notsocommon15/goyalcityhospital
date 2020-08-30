@@ -181,7 +181,7 @@
               
               <!--======= FORM  =========-->
               <div id="contact_message" class="success-msg"> <i class="fa fa-paper-plane-o"></i>Thank You. Your Message has been Submitted</div>
-            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false">
+            <form role="form" id="contact_form" class="contact-form" method="post" onSubmit="return false" action="php/submit.php">
               <ul class="row">
                 <li class="col-sm-6">
                   <label>full name *

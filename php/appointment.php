@@ -88,13 +88,13 @@ $mail->AddAddress($to, $toname); // Put your email
 $mail->WordWrap = 50;
 $mail->IsHTML(true);
 
-$mail->Subject = "Client Appoitment";
+$mail->Subject = "Client Appointment";
 $mail->Body = $body;
 $mail->AltBody = $message;
 
 if (!$mail->Send()) {
     $recipient = $to;
-    $subject = 'Appoitment form failed';
+    $subject = 'Appointment form failed';
     $content = $body;
     mail($recipient, $subject, $content, "From: $name\r\nReply-To: $email\r\nX-Mailer: DT_formmail");
     exit;

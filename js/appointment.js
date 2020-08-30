@@ -83,7 +83,7 @@ $(function () {
 				success:function () {
 					$('#appointment').prepend("<div class=\"alert alert-success fade in\"><button class=\"close\" data-dismiss=\"alert\" type=\"button\">&times;</button><strong>Form Submitted!</strong> We will be in touch soon.</div>");
 					$('#appointment')[0].reset();
-					window.location.href = "index.html";
+					window.location.href = "index-1.php";
 				}
 			});
 			return false;
