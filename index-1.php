@@ -2,49 +2,59 @@
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
 
-  require 'phpmailer/src/Exception.php';
-  require 'phpmailer/src/PHPMailer.php';
-  require 'phpmailer/src/SMTP.php';
+  require 'vendor/phpmailer/phpmailer/src/Exception.php';
+  require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+  require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
   // Include autoload.php file
-  require 'autoload.php';
+  require 'vendor/autoload.php';
   // Create object of PHPMailer class
   $mail = new PHPMailer(true);
+  $mail->SMTPOptions = array(
+    'ssl' => array(
+    'verify_peer' => false,
+    'verify_peer_name' => false,
+    'allow_self_signed' => true
+    )
+    );
 
   $output = '';
 
+
   if (isset($_POST['sendmail'])) {
     $name = $_POST['name'];
-    $email = $_POST['email'];
+    $email = $_REQUEST['email'];
+    $service = $_REQUEST['select1'];
     $phone = $_POST['phone'];
-    $select1 = $_POST['select1'];
-    $datepicker = $_POST['datepicker'];
     $message = $_POST['message'];
+    $select1 = $_POST['datepicker'];
+
+
 
     try {
-      $mail->isSMTP();
+     $mail->isSMTP();
       $mail->Host = 'smtp.gmail.com';
       $mail->SMTPAuth = true;
       // Gmail ID which you want to use as SMTP server
       $mail->Username = 'leomessi21210@gmail.com';
       // Gmail Password
-      $mail->Password = 'add password here';
+      $mail->Password = 'leom@6969';
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
       $mail->Port = 587;
+      $mail->SMTPSecure = "tls";
 
       // Email ID from which you want to send the email
-      $mail->setFrom($email);
+      $mail->setFrom('leomessi21210@gmail.com');
       // Recipient Email ID where you want to receive emails
-      $mail->addAddress('leomessi2121@gmail.com');
+      $mail->addAddress('kedisubham15@gmail.com');
 
       $mail->isHTML(true);
       $mail->Subject = 'Form Submission';
-      $mail->Body = "<h3>Name : $name <br>Email : $email <br>Phone : $phone <br>Department : $select1 <br>Date : $datepicker <br>Message : $message</h3>";
+      $mail->Body = "<h3>Name : $name <br>Email : $email <br>Phone: $phone <br>Department: $service <br>Date: $select1 <br>Message : $message</h3>";
 
       $mail->send();
-      $output = '<div class="alert alert-success">
-                  <h5>Thankyou! for contacting us, We\'ll get back to you soon!</h5>
-                </div>';
+      $output = '<div>
+                 </div> ';
     } catch (Exception $e) {
       $output = '<div class="alert alert-danger">
                   <h5>' . $e->getMessage() . '</h5>

@@ -68,7 +68,7 @@
         <!-- MENU BUTTON RESPONSIVE -->
         <div class="menu-toggle"> <i class="fa fa-bars"> </i> </div>
         <ul class="ownmenu">
-          <li class="active"><a href="index-1.php">Home</a>
+          <li><a href="index-1.php">Home</a>
             <!--<ul class="dropdown animated-3s fadeIn">
               <li><a href="index-1.php">Home</a></li>
               <li><a href="index-1.php">Home Slider</a></li>
