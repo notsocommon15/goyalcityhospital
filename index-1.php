@@ -38,7 +38,7 @@
       // Gmail ID which you want to use as SMTP server
       $mail->Username = 'leomessi21210@gmail.com';
       // Gmail Password
-      $mail->Password = 'leom@6969';
+      $mail->Password = '';
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
       $mail->Port = 587;
       $mail->SMTPSecure = "tls";
